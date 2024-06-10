@@ -1,13 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\ClientsController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\AuthController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 Route::group([
     'prefix' => 'auth'
@@ -30,4 +26,11 @@ Route::group([
     Route::put('users/{id}/grantPermission', [UsersController::class, 'grantPermission']);
     Route::put('users/{id}/revokePermission', [UsersController::class, 'revokePermission']);
     Route::put('users/{id}/updatePermission', [UsersController::class, 'updatePermission']);
+
+    /** Clients Routes */
+    Route::post('clients/new', [ClientsController::class, 'createClient']);
+    Route::get('clients', [ClientsController::class, 'getClients']);
+    Route::get('clients/{id}', [ClientsController::class, 'getSingleClient']);
+    Route::put('clients/{id}', [ClientsController::class, 'updateClient']);
+    Route::get('clients/search={search}', [ClientsController::class, 'searchClient']);
 });
